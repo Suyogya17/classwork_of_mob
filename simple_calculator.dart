@@ -1,15 +1,6 @@
 import 'dart:io';
 
-void main() {
-  print("Enter the first number:");
-  double num1 = double.parse(stdin.readLineSync()!);
-
-  print("Enter the second number:");
-  double num2 = double.parse(stdin.readLineSync()!);
-
-  print("Choose an operation (+, -, *, /):");
-  String? operation = stdin.readLineSync();
-
+double? performOperation(double num1, double num2, String operation) {
   double? result;
 
   switch (operation) {
@@ -27,13 +18,31 @@ void main() {
         result = num1 / num2;
       } else {
         print("Division by zero is not allowed.");
-        return;
       }
       break;
     default:
       print("Invalid operation.");
-      return;
+      break;
   }
 
-  print("The result of $num1 $operation $num2 is $result.");
+  return result;
+}
+
+void main() {
+  print("Enter the first number:");
+  double num1 = double.parse(stdin.readLineSync()!);
+
+  print("Enter the second number:");
+  double num2 = double.parse(stdin.readLineSync()!);
+
+  print("Choose an operation (+, -, *, /):");
+  String? operation = stdin.readLineSync();
+
+  if (operation != null) {
+    double? result = performOperation(num1, num2, operation);
+
+    if (result != null) {
+      print("The result of $num1 $operation $num2 is $result.");
+    }
+  }
 }
